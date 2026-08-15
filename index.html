@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan | Nihaya & Ikmal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Wadah Video MP4 (Animasi Pintu) -->
+  <div id="video-preloader-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: transparent; pointer-events: none;"></div>
+  
+  <!-- Ornamen Animasi Layer Depan (Partikel Emas) -->
+  <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;"></canvas>
+
+  <!-- Audio Element for Background Music -->
+  <audio id="bg-music" loop>
+    <!-- Background music downloaded from YouTube -->
+    <source src="assets/music.webm" type="audio/webm">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Floating Music Toggle Button -->
+  <button id="music-btn" class="music-btn" aria-label="Toggle Music">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="music-icon"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  </button>
+
+  <!-- Full-Frame Door Animation Overlay -->
+  <div id="door-container" class="door-container">
+    <div class="door door-left">
+      <div class="door-pattern"></div>
+    </div>
+    <div class="door door-right">
+      <div class="door-pattern"></div>
+    </div>
+    
+    <div class="door-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem;">
+      <p class="subtitle" style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">Walimatul 'Ursy</p>
+      <h1 style="font-size: 2.5rem; margin-bottom: 5px; color: #1a3c34; font-family: var(--font-heading);">Nihaya & Ikmal</h1>
+      <p class="date" style="font-size: 1rem; color: #7A6348; margin-bottom: 0.3rem; font-weight: 500;">Selasa, 25 / 08 / 2026</p>
+      <p class="date-hijri" style="font-size: 0.95rem; color: #1a3c34; margin-bottom: 2rem; font-weight: 600;">12 Rabi'ul Awal 1448 H</p>
+      
+      <!-- Guest Name -->
+      <div class="guest-box" style="background: rgba(255,255,255,0.9); border: 1px solid var(--accent-color); padding: 1.2rem 2rem; border-radius: 10px; margin-bottom: 2rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <p style="font-size: 0.8rem; color: #7A6348; margin-bottom: 5px;">Katur Dhumateng Ingkang Minulya:</p>
+        <h3 id="guest-name-display" style="color: #1a3c34; font-family: var(--font-heading); font-size: 1.3rem; margin: 0;">[Nama Tamu Akan Muncul Di Sini]</h3>
+      </div>
+
+      <button id="open-door-btn" class="btn-primary" style="animation: pulse-gold 2s infinite;">Buka Undangan</button>
+    </div>
+  </div>
+
+  <!-- Main Website Content -->
+  <main id="main-content">
+    
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="hero-bg"></div>
+      <div class="container reveal">
+        <!-- Couple Names Card with Islamic Ornament -->
+        <div class="couple-card reveal" style="background: rgba(255, 255, 255, 0.95); border: 2px solid var(--accent-color); border-radius: 120px 120px 15px 15px; padding: 4rem 1.5rem; margin: 0 0 3rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative; text-align: center;">
+          
+          <!-- Inner Border to make it look like an elegant frame -->
+          <div style="position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 112px 112px 7px 7px; pointer-events: none;"></div>
+
+          <!-- Islamic Ornament Top -->
+          <div class="ornament-top-card" style="margin-bottom: 2rem;">
+            <!-- Gunungan Motif -->
+            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 0L100 80C100 80 80 100 50 100C20 100 0 80 0 80L50 0Z" fill="var(--accent-color)" opacity="0.8"/>
+              <path d="M50 15L85 75C85 75 70 90 50 90C30 90 15 75 15 75L50 15Z" fill="var(--text-dark)"/>
+              <path d="M50 30L70 70C70 70 60 80 50 80C40 80 30 70 30 70L50 30Z" fill="var(--accent-color)"/>
+            </svg>
+          </div>
+
+          <h1 class="couple-names" style="font-size: 2.5rem; margin: 1rem 0 0.5rem 0; line-height: 1.2; font-weight: normal; position: relative; z-index: 1;">Nihaya Husniyah Ummu Qoyyim</h1>
+          <p style="font-size: 0.95rem; color: #7A6348; margin-bottom: 1rem; line-height: 1.6; position: relative; z-index: 1;">
+            Putri Bapak Imam Mawardi Ridlwan<br>
+            &amp; Ibu Farida Dyah Nurhana
+          </p>
+          
+          <span class="and-symbol" style="display: block; margin: 2rem 0; font-size: 3rem; color: var(--accent-color); font-family: var(--font-heading); position: relative; z-index: 1;">&amp;</span>
+          
+          <h1 class="couple-names" style="font-size: 2.5rem; margin: 0.5rem 0; font-weight: normal; position: relative; z-index: 1;">Ikmal Khoiri</h1>
+          <p style="font-size: 0.95rem; color: #7A6348; margin-bottom: 1rem; line-height: 1.6; position: relative; z-index: 1;">
+            Putra Bapak Mulyono Abdul Basyir<br>
+            &amp; Ibu Siti Khotimah
+          </p>
+        </div>
+
+        <!-- Quran Section -->
+        <div class="hadith-section" style="margin-bottom: 2rem;">
+          <p style="font-size: 1.5rem; color: #1a3c34; direction: rtl; line-height: 2;">
+            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+          </p>
+          <p style="font-style: italic; font-size: 0.9rem; color: #5d4037; margin-top: 10px;">
+            "Lan saking antawisipun tandha kuwaosipun Allah, inggih punika Panjenenganipun sampun nitahaken kangge panjenengan garwa saking golongan panjenengan piyambak, supados panjenengan manggih katentreman wonten ing sisihipun. Lan Panjenenganipun sampun ndadosaken katresnan saha welas asih ing antawisipun panjenengan sedaya. Satemenipun, wonten ing perkawis punika saestu wonten tenger-tenger kangge para tiyang ingkang remen manah lan mikir."<br>
+            <strong style="color: #D4AF37;">(QS. Ar-Rum: 21)</strong>
+          </p>
+        </div>
+
+        <!-- Guest Name (Telah dipindah ke cover/door-content) -->
+
+        <!-- Greeting -->
+        <p class="greeting" style="font-size: 1.2rem; font-weight: 600; color: #1a3c34; margin-bottom: 1.5rem;">السلام عليكم ورحمة الله وبركاته</p>
+        <p class="intro-text" style="font-size: 0.95rem; line-height: 1.8;">
+          Kanthi manah ingkang kebak raos syukur, nyenyuwun rahmat saha ridho saking Allah Ta'ala, kula sabrayat nyuwun kanthi sanget rawuh saha donga pangestu Bapak/Ibu/Sedherek wonten ing adicara walimatul ‘ursy putri kinasih kula:
+        </p>
+        
+
+
+        <!-- Event Details inline for Walimatul Ursy -->
+        <div class="inline-event-details" style="text-align: left; background: rgba(255,255,255,0.7); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <p style="text-align: center; font-weight: 600; color: #1a3c34; margin-bottom: 1.5rem; font-size: 1.1rem; direction: rtl;">إن شاء الله</p>
+          <p style="text-align: center; font-weight: 600; color: #1a3c34; margin-bottom: 1.5rem; font-size: 1.1rem;">badhe kalampahan ing:</p>
+          <table style="width: 100%; font-size: 0.95rem; color: #3e2723; line-height: 1.8;">
+            <tr><td style="width: 30%; font-weight: 600; vertical-align: top;">Dinten</td><td style="width: 5%; vertical-align: top;">:</td><td style="vertical-align: top;">Selasa</td></tr>
+            <tr><td style="font-weight: 600; vertical-align: top;">Surya</td><td style="vertical-align: top;">:</td><td style="vertical-align: top;">12 Robi'ul Awal 1448 H<br>25 Agustus 2026</td></tr>
+            <tr><td style="font-weight: 600; vertical-align: top;">Wanci</td><td style="vertical-align: top;">:</td><td style="vertical-align: top;">09.30 WIB</td></tr>
+            <tr><td style="font-weight: 600; vertical-align: top;">Panggenan</td><td style="vertical-align: top;">:</td><td style="vertical-align: top;">Hall Pesantren Al Azhaar Kedungwaru<br>Jl. Pahlawan Gg 1 No. 40 Kedungwaru Tulungagung</td></tr>
+          </table>
+        </div>
+
+        <p class="intro-text" style="font-size: 0.95rem; line-height: 1.8;">
+          Mekaten ulem punika kula haturaken. Sepindah malih kula sabrayat nyuwun donga pangestu panjenengan sami, mugi-mugi bale wisma ingkang badhe dipun bina tansah dados ladang ibadah, kebak ing barokah, saha putra wayah ingkang shalih-shalihah.
+        </p>
+        <p class="intro-text" style="font-size: 0.95rem; line-height: 1.8; margin-top: 1rem;">
+          Awit saking rawuh saha donga pangestunipun, kula ngaturaken agunging panuwun, jazakumullah ahsanal jaza'.
+        </p>
+        <p class="greeting" style="font-size: 1.2rem; font-weight: 600; color: #1a3c34; margin-top: 2rem; margin-bottom: 2rem; direction: rtl;">والسلام عليكم ورحمة الله وبركاته</p>
+
+        <div class="closing-signature reveal" style="margin-top: 2rem;">
+          <p style="font-style: italic; color: #7A6348;">Atur Taklim Kula,<br>Keluwarga:</p>
+          <p style="font-weight: 600; color: #1a3c34; margin-top: 10px; margin-bottom: 5px; font-size: 0.9rem;">Imam Mawardi Ridlwan & Farida Dyah Nurhana</p>
+          <p style="font-weight: 600; color: #1a3c34; font-size: 0.9rem;">Mulyono Abdul Basyir & Siti Khotimah</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-wrapper reveal" style="margin-top: 4rem;">
+          <h3>Menuju Hari Bahagia</h3>
+          <div class="countdown" id="countdown">
+            <div class="time-box">
+              <span id="days">00</span>
+              <p>Hari</p>
+            </div>
+            <div class="time-box">
+              <span id="hours">00</span>
+              <p>Jam</p>
+            </div>
+            <div class="time-box">
+              <span id="minutes">00</span>
+              <p>Menit</p>
+            </div>
+            <div class="time-box">
+              <span id="seconds">00</span>
+              <p>Detik</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Details Section (New Layout) -->
+    <section id="events" class="events section">
+      <div class="container">
+        
+        <div class="arabic-poem reveal" style="margin: 0 0 4rem 0; text-align: center; color: #1a3c34;">
+          <p style="font-size: clamp(0.85rem, 4.2vw, 1.4rem); white-space: nowrap; line-height: 2.2; direction: rtl; font-family: 'Amiri', serif; font-weight: 600;">
+            لَا تَعْشَقَنْ قَبْلَ النِّكَاحِ إِنَّهُ ♡ يَجُرُّ قَلْبَكَ إِلَى شَقَاوَةِ<br>
+            وَابْنِ الْمَحَبَّةْ بَعْدَ عَقْدٍ ثَابِتِ ♡ فِيْ رَحْمَةٍ سَكِيْنَةٍ مَوَدَّةِ<br>
+            وَالحُبُّ بَعْدَ عَقْدِنَا مُبَارَكُ ♡ وَهْوَ سَبِيْلُ الْخَيْرِ لِلنِّهَايَةِ
+          </p>
+        </div>
+
+        <div class="event-header reveal" style="text-align: center; margin-bottom: 2rem;">
+          <h2 class="heading-green" style="font-size: 2.2rem; margin-bottom: 0.5rem; color: #1a3c34; font-family: 'Playfair Display', serif;">Rincian Adicara</h2>
+          <p class="subtitle-text" style="font-size: 0.95rem; color: #5d4037; padding: 0 1rem; max-width: 400px; margin: 0 auto 2rem;">Sumangga katuran rawuh saha paring donga pangestu dhumateng dhauping suci kula sekalian.</p>
+          
+          <div class="sparkle-icon" style="margin-bottom: 1rem;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#D4AF37"/>
+               <path d="M5 4L5.5 6.5L8 7L5.5 7.5L5 10L4.5 7.5L2 7L4.5 6.5L5 4Z" fill="#D4AF37"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="gold-divider reveal"></div>
+
+        <div class="event-card-new reveal" style="margin-top: 3rem; text-align: center; padding: 4rem 1.5rem; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);">
+          <h3 style="color: #1a3c34; font-family: var(--font-heading); font-size: 3rem; margin-bottom: 1.5rem; font-weight: normal;">Ijab Kabul</h3>
+          
+          <img src="assets/couple-vector.png" alt="Pasangan Pengantin" class="venue-img reveal" style="width: 180px; height: auto; margin-bottom: 2rem;">
+          
+          <p style="font-weight: 700; color: #1a3c34; font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-body);">Selasa, 25 Agustus 2026</p>
+          <p style="color: #3e2723; font-size: 0.95rem; margin-bottom: 2.5rem;">Pukul : 09:30 WIB - Selesai</p>
+          
+          <p style="font-weight: 700; color: #1a3c34; font-size: 1rem; margin-bottom: 0.5rem;">Panggenan Acara :</p>
+          <p style="color: #3e2723; font-size: 0.95rem; line-height: 1.6; max-width: 280px; margin: 0 auto 2.5rem;">
+            Hall Pesantren Al Azhaar Kedungwaru<br>
+            Jl. Pahlawan Gg 1 No. 40, Tulungagung
+          </p>
+          
+          <a href="https://maps.app.goo.gl/ctXcn2xA7Zt5hnzQ8" target="_blank" class="btn-dark-green pulse-btn" style="padding: 10px 35px; border-radius: 30px; font-weight: 500; letter-spacing: 1px; display: inline-block;">
+            Pirsani Lokasi
+          </a>
+        </div>
+
+        <div class="gold-divider reveal" style="margin-top: 4rem;"></div>
+
+        <div class="map-section-new reveal" style="margin-top: 3rem; text-align: center;">
+          <h3 class="heading-green" style="margin-bottom: 1.5rem; color: #1a3c34; font-family: 'Playfair Display', serif;">Pitedah Papan Panggenan</h3>
+          <div class="map-container-relative">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.4137269158316!2d111.89531531477963!3d-8.059206794196161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78e2e28a9b2b69%3A0x6a2c208c02eb9db1!2sPondok%20Pesantren%20Al%20Azhaar%20Tulungagung!5e0!3m2!1sen!2sid!4v1692257211111!5m2!1sen!2sid" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-overlay-btn">
+              <a href="https://maps.app.goo.gl/ctXcn2xA7Zt5hnzQ8" target="_blank" class="btn-pill-white">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A6348" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Pirsani Papan Panggenan
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="rsvp section">
+      <div class="container reveal">
+        <h2 class="section-title">Konfirmasi Rawuh & Donga Pangestu</h2>
+        <p class="rsvp-desc">Rawuh saha donga pangestu panjenengan minangka kabagyan ingkang tanpa upami tumrap kula sekalian.</p>
+        
+        <form id="rsvp-form" class="rsvp-form">
+          <div class="form-group">
+            <label for="name">Asma Jangkep</label>
+            <input type="text" id="name" name="nama" required placeholder="Serat asma panjenengan">
+          </div>
+          
+          <div class="form-group">
+            <label for="attendance">Konfirmasi Rawuh</label>
+            <select id="attendance" name="kehadiran" required>
+              <option value="" disabled selected>Pilih konfirmasi...</option>
+              <option value="Hadir">Inggih, badhe rawuh</option>
+              <option value="Tidak Hadir">Nyuwun pangapunten, mboten saged rawuh</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="guests">Cacahing Tamu</label>
+            <select id="guests" name="guests" required>
+              <option value="1">1 Tiyang</option>
+              <option value="2">2 Tiyang</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Pesen & Donga Pangestu</label>
+            <textarea id="message" name="pesan" rows="4" required placeholder="Serat donga pangestu kagem manggih wilujeng"></textarea>
+          </div>
+          
+          <button type="submit" class="btn-primary btn-block">Kirim Donga Pangestu</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        <h2>Nihaya & Ikmal</h2>
+        <p class="credits">Made with ❤️ | Design by Daffa ZM</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/script.js"></script>
+
+  <!-- Custom Success Modal -->
+  <div id="success-modal" class="custom-modal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+      <h3>Matur Nuwun</h3>
+      <p>Panyuwun donga pangestu panjenengan sampun katampi.</p>
+      <button id="close-modal-btn" class="btn-dark-green">Tutup</button>
+    </div>
+  </div>
+</body>
+</html>
